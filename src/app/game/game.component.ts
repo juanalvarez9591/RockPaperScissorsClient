@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GetmovesService } from '../getmoves.service';
+import { GamelogService } from '../gamelog.service';
 
 @Component({
   selector: 'app-game',
@@ -14,7 +15,7 @@ export class GameComponent implements OnInit {
 
   MoveList$!:Observable<any[]>;
 
-  constructor(private moveservice:GetmovesService) { }
+  constructor(private moveservice:GetmovesService, private gamelogservice: GamelogService) { }
 
   public handleSelection(selection: any, pswitch: boolean): void {
     if (pswitch === true) {
@@ -31,12 +32,14 @@ export class GameComponent implements OnInit {
   }
 
   private generateResultString(p1selection: any, p2selection: any): void {
+    const pn = this.gamelogservice.getNameData();
+
     if (p1selection.kills === p2selection.moveName) {
-      this.result = "Player 1 killed Player's 2 "+p2selection.moveName+" with his "+p1selection.moveName
+      this.result = pn[0]+" killed "+pn[1]+" "+p2selection.moveName+" with his "+p1selection.moveName
     } else if (p1selection.moveName === p2selection.kills) {
-      this.result = "Player 2 killed Player's 1 "+p2selection.moveName+" with his "+p1selection.moveName
+      this.result = pn[1]+" killed "+pn[0]+" "+p2selection.moveName+" with his "+p1selection.moveName
     } else {
-      this.result = "Player 1 and Player 2 tied!"
+      this.result = pn[0]+" and "+pn[1]+" tied!"
     }
   }
 
