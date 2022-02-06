@@ -8,15 +8,32 @@ import { GetmovesService } from '../getmoves.service';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-  selected:string = "";
-
+  p1selected:any = {moveName: "Select an option: "}; 
+  p2selected:any = {moveName: "Select an option: "};
+  result:string = "";
 
   MoveList$!:Observable<any[]>;
 
   constructor(private moveservice:GetmovesService) { }
 
-  public play(action: string): void {
-    console.log("Player one choosed: ", action)
+  public handleSelection(selection: any, pswitch: boolean): void {
+    if (pswitch === true) {
+      this.p1selected = selection;
+    } else {
+      this.p2selected = selection;
+    }    
+  }
+
+  public handleResult(p1selection: any, p2selection: any): void {
+    if (p1selection.kills === p2selection.moveName) {
+      this.result = "Player 1 killed Player's 2 "+p2selection.moveName+" with his "+p1selection.moveName
+    } else if (p1selection.moveName === p2selection.kills) {
+      this.result = "Player 2 killed Player's 1 "+p2selection.moveName+" with his "+p1selection.moveName
+    } else if (p1selection.moveName === p2selection.moveName) {
+      this.result = "Player 1 and Player 2 tied!"
+    } else {
+      this.result = ""
+    }
   }
 
   ngOnInit(): void {

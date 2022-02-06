@@ -1,11 +1,18 @@
 <div>
     <mat-form-field appearance="fill">
-        <mat-label>Select an option</mat-label>
-        <mat-select [(value)]="selected">
-          <mat-option *ngFor="let i of MoveList$|async " value={{i.moveName}}>{{i.moveName}}</mat-option>
+        <mat-label>{{p1selected.moveName}}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let i of MoveList$|async " (onSelectionChange)="handleSelection(i, true)">{{i.moveName}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>{{p2selected.moveName}}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let i of MoveList$|async " (onSelectionChange)="handleSelection(i, false)">{{i.moveName}}</mat-option>
         </mat-select>
     </mat-form-field>
       
-    <button mat-button color="primary" [disabled]="selected === ''" (click)="play(selected)">Go!</button>
-
+    <button mat-button color="primary" [disabled]=" p1selected.moveName == 'Select an option: ' || p2selected.moveName == 'Select an option: '" (click)="handleResult(p1selected, p2selected)">Go!</button>
+    <p>{{result}}</p>
 </div>
