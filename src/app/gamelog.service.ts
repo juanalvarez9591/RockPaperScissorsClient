@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,7 @@ export class GamelogService {
 
   readonly APIURL = "https://localhost:7029/api";
 
-  public data = [
-    {
+  public data = {
       "id": 0,
       "player1": "string",
       "player2": "string",
@@ -17,29 +17,32 @@ export class GamelogService {
       "loser": "string",
       "totalRounds": 0
     }
-  ]
+  
 
   constructor(private http:HttpClient) { }
 
-  postGameData() {
-    return this.http.post(this.APIURL+"/GameLogs", this.data)
+  postGameData() {    
+    console.log("post")
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    }); 
+    return this.http.post(this.APIURL+"/GameLogs", JSON.stringify(this.data), {headers: headers})
   }
 
   saveNameData(n1: string, n2: string) {
-    this.data[0]["player1"] = n1;
-    this.data[0]["player2"] = n2;
+    this.data["player1"] = n1;
+    this.data["player2"] = n2;
 
-    console.log(this.data[0])
+    console.log(this.data)
   }
 
   getNameData() {
-    return [this.data[0]["player1"], this.data[0]["player2"]]
+    return [this.data["player1"], this.data["player2"]]
   }
 
   saveGameData(w: string, l: string, tr: number) {
-    this.data[0]["winner"] = w;
-    this.data[0]["loser"] = l;
-    this.data[0]["totalRounds"] = tr;
+    this.data["winner"] = w;
+    this.data["loser"] = l;
+    this.data["totalRounds"] = tr;
   }
-  
 }

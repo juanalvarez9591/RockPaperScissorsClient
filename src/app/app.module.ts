@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { GameComponent } from './game/game.component';
@@ -29,7 +30,12 @@ import { ReplayComponent } from './replay/replay.component';
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MaterialExampleModule
+    MaterialExampleModule,
+    RouterModule.forRoot([
+      {path: '', component: TitlescreenComponent},
+      {path: 'game', component: GameComponent},
+      {path: 'end', component: ReplayComponent}
+    ]),
   ],
   providers: [
     GetmovesService,

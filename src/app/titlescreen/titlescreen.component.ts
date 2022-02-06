@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GamelogService } from '../gamelog.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-titlescreen',
@@ -19,11 +20,15 @@ export class TitlescreenComponent implements OnInit {
 
   public handleSubmit(): void{
     this.gamelogservice.saveNameData(this.i1, this.i2)
+    this._router.navigateByUrl('/game')
+  }
+
+  public handleStart(): void{
     this.toggle = !this.toggle;
   }
 
 
-  constructor(private gamelogservice: GamelogService) { }
+  constructor(private gamelogservice: GamelogService, private _router: Router) { }
 
   ngOnInit(): void {
   }

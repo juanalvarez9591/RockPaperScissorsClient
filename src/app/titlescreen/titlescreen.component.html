@@ -1,5 +1,10 @@
 <div>
-    <form *ngIf="toggle" class="example-form">
+    <div *ngIf="toggle">
+    <h1>Game of Drones!</h1>
+    <button mat-raised-button color="primary" (click)="handleStart()">Start game!</button>
+    </div>
+    <div *ngIf="!toggle">
+    <form  class="example-form">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Player's 1 name: </mat-label>
             <input matInput placeholder="Ricardo" name="i1" [(ngModel)]="i1">
@@ -8,7 +13,7 @@
             <mat-label>Player's 2 name: </mat-label>
             <input matInput placeholder="Jorge" name="i2" [(ngModel)]="i2">
         </mat-form-field>
-        <button mat-button color="primary" [disabled]="i1 === '' || i2 === ''" (click)="handleSubmit()">Confirm names.</button>
     </form>
-    <h1 *ngIf="!toggle">{{i1}} vs {{i2}}</h1>
+    <button mat-raised-button color="primary" [disabled]="i1 === '' || i2 === ''" (click)="handleSubmit()">Confirm names.</button>
+    </div>
 </div>

@@ -1,18 +1,26 @@
-<div>
+<div id="parent">
+    <h1>{{score["p1"]+score["p2"]}}/3</h1>
+
+    <div id="select">
+    <p>{{pnames$[0]}} move:</p>
     <mat-form-field appearance="fill">
         <mat-label>{{p1selected.moveName}}</mat-label>
         <mat-select>
           <mat-option *ngFor="let i of MoveList$|async " (onSelectionChange)="handleSelection(i, true)">{{i.moveName}}</mat-option>
         </mat-select>
     </mat-form-field>
-
+    
+    <p>{{pnames$[1]}} move:</p>
     <mat-form-field appearance="fill">
         <mat-label>{{p2selected.moveName}}</mat-label>
         <mat-select>
           <mat-option *ngFor="let i of MoveList$|async " (onSelectionChange)="handleSelection(i, false)">{{i.moveName}}</mat-option>
         </mat-select>
     </mat-form-field>
+    </div>
       
-    <button mat-button color="primary" [disabled]=" p1selected.moveName == 'Select an option: ' || p2selected.moveName == 'Select an option: '" (click)="handleSubmit(p1selected, p2selected)">Go!</button>
-    <p>{{result}}</p>
+    <button mat-raised-button color="primary" [disabled]=" p1selected.moveName == 'Select an option: ' || p2selected.moveName == 'Select an option: ' || score['p1']+score['p2'] === 3 " (click)="handleSubmit(p1selected, p2selected)">Go!</button>
+</div>
+<div id="log">
+  <p *ngFor="let i of result">{{i}}</p>
 </div>
