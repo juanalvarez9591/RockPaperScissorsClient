@@ -13,6 +13,6 @@
         </mat-select>
     </mat-form-field>
       
-    <button mat-button color="primary" [disabled]=" p1selected.moveName == 'Select an option: ' || p2selected.moveName == 'Select an option: '" (click)="handleResult(p1selected, p2selected)">Go!</button>
+    <button mat-button color="primary" [disabled]=" p1selected.moveName == 'Select an option: ' || p2selected.moveName == 'Select an option: '" (click)="handleSubmit(p1selected, p2selected)">Go!</button>
     <p>{{result}}</p>
 </div>

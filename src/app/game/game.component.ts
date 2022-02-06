@@ -24,21 +24,28 @@ export class GameComponent implements OnInit {
     }    
   }
 
-  public handleResult(p1selection: any, p2selection: any): void {
+  public handleSubmit(p1selection: any, p2selection: any): void {
+    this.refreshMoves();
+    this.generateResultString(p1selection, p2selection);
+    
+  }
+
+  private generateResultString(p1selection: any, p2selection: any): void {
     if (p1selection.kills === p2selection.moveName) {
       this.result = "Player 1 killed Player's 2 "+p2selection.moveName+" with his "+p1selection.moveName
     } else if (p1selection.moveName === p2selection.kills) {
       this.result = "Player 2 killed Player's 1 "+p2selection.moveName+" with his "+p1selection.moveName
-    } else if (p1selection.moveName === p2selection.moveName) {
-      this.result = "Player 1 and Player 2 tied!"
     } else {
-      this.result = ""
+      this.result = "Player 1 and Player 2 tied!"
     }
+  }
+
+  private refreshMoves(): void{
+    this.MoveList$ = this.moveservice.getMovesList();
   }
 
   ngOnInit(): void {
     this.MoveList$ = this.moveservice.getMovesList()
     
   }
-
 }

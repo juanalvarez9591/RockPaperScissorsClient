@@ -12,11 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MaterialExampleModule} from '../material.module';
+import { TitlescreenComponent } from './titlescreen/titlescreen.component';
+import { ReplayComponent } from './replay/replay.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent
+    GameComponent,
+    TitlescreenComponent,
+    ReplayComponent
   ],
   imports: [
     BrowserModule,
